@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Everything About You 💗</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    min-height:100vh;
+    font-family:'Poppins',sans-serif;
+    background:
+      radial-gradient(circle at 10% 20%, #ffdce8 0, transparent 25%),
+      radial-gradient(circle at 90% 80%, #e8ddff 0, transparent 25%),
+      linear-gradient(135deg,#fff1f7,#f4edff);
+    color:#5d4552;
+    overflow-x:hidden;
+}
+
+.container{
+    width:92%;
+    max-width:1000px;
+    margin:auto;
+    padding:45px 0 70px;
+    text-align:center;
+}
+
+h1{
+    font-family:'Dancing Script',cursive;
+    font-size:58px;
+    color:#d85d88;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    font-size:15px;
+    color:#927585;
+    margin-bottom:35px;
+}
+
+/* HEARTS */
+
+.heart{
+    position:fixed;
+    color:#ff9fbd;
+    animation:float 7s linear infinite;
+    pointer-events:none;
+    z-index:0;
+}
+
+@keyframes float{
+    0%{
+        transform:translateY(100vh) rotate(0deg);
+        opacity:0;
+    }
+    15%{opacity:.8;}
+    100%{
+        transform:translateY(-10vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
+/* SCRAPBOOK */
+
+.scrapbook{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:25px;
+    margin-bottom:45px;
+}
+
+.card{
+    background:#fff;
+    padding:16px;
+    border-radius:8px;
+    box-shadow:0 12px 30px rgba(100,60,80,.12);
+    transition:.4s;
+    cursor:pointer;
+    position:relative;
+}
+
+.card:hover{
+    transform:translateY(-10px) rotate(-1deg);
+    box-shadow:0 20px 40px rgba(100,60,80,.18);
+}
+
+.card:nth-child(2){
+    transform:rotate(2deg);
+}
+
+.card:nth-child(3){
+    transform:rotate(-2deg);
+}
+
+.card:nth-child(4){
+    transform:rotate(1deg);
+}
+
+.photo{
+    height:170px;
+    border-radius:5px;
+    background:linear-gradient(135deg,#ffd9e7,#eadcff);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:55px;
+    margin-bottom:15px;
+}
+
+.card h3{
+    font-family:'Dancing Script',cursive;
+    font-size:28px;
+    color:#c75a82;
+    margin-bottom:5px;
+}
+
+.card p{
+    font-size:13px;
+    line-height:1.6;
+    color:#816b76;
+}
+
+/* REASONS */
+
+.section-title{
+    font-family:'Dancing Script',cursive;
+    font-size:42px;
+    color:#c95b83;
+    margin:45px 0 20px;
+}
+
+.reasons{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:15px;
+}
+
+.reason{
+    background:rgba(255,255,255,.75);
+    border:1px solid rgba(255,255,255,.9);
+    padding:20px;
+    border-radius:20px;
+    transition:.3s;
+    cursor:pointer;
+}
+
+.reason:hover{
+    transform:scale(1.04);
+    background:white;
+}
+
+.reason .emoji{
+    font-size:32px;
+    margin-bottom:8px;
+}
+
+.reason p{
+    font-size:14px;
+}
+
+/* LOVE JAR */
+
+.jar-area{
+    margin:30px auto;
+}
+
+.jar{
+    width:150px;
+    height:180px;
+    margin:20px auto;
+    border:5px solid #e88aaa;
+    border-radius:25px 25px 40px 40px;
+    background:rgba(255,255,255,.55);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:60px;
+    cursor:pointer;
+    transition:.4s;
+    box-shadow:0 15px 35px rgba(200,100,140,.15);
+}
+
+.jar:hover{
+    transform:scale(1.08) rotate(2deg);
+}
+
+.jar-text{
+    font-family:'Dancing Script',cursive;
+    font-size:27px;
+    color:#c95b83;
+    min-height:55px;
+    padding:0 15px;
+}
+
+/* LETTER */
+
+.letter{
+    max-width:750px;
+    margin:40px auto;
+    background:#fffdf7;
+    padding:40px 35px;
+    border-radius:5px;
+    box-shadow:0 15px 45px rgba(80,50,60,.15);
+    position:relative;
+    text-align:left;
+    transform:rotate(-.5deg);
+}
+
+.letter:before{
+    content:"💗";
+    position:absolute;
+    top:-20px;
+    right:25px;
+    font-size:35px;
+}
+
+.letter h2{
+    text-align:center;
+    font-family:'Dancing Script',cursive;
+    font-size:42px;
+    color:#c9547c;
+    margin-bottom:20px;
+}
+
+.letter p{
+    font-family:'Dancing Script',cursive;
+    font-size:23px;
+    line-height:1.7;
+    color:#765765;
+    margin-bottom:14px;
+}
+
+.signature{
+    text-align:right;
+    font-size:27px !important;
+    color:#c9547c !important;
+}
+
+/* FINAL BUTTON */
+
+.final-btn{
+    border:none;
+    padding:16px 30px;
+    border-radius:30px;
+    background:linear-gradient(135deg,#ff83a9,#c88cff);
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    box-shadow:0 10px 25px rgba(210,100,160,.25);
+    transition:.3s;
+}
+
+.final-btn:hover{
+    transform:scale(1.08);
+}
+
+/* SURPRISE */
+
+#surprise{
+    display:none;
+    margin-top:25px;
+    animation:pop .6s ease;
+}
+
+.surprise-box{
+    background:white;
+    border-radius:25px;
+    padding:30px;
+    box-shadow:0 15px 40px rgba(100,60,80,.15);
+}
+
+.surprise-box .big{
+    font-size:55px;
+}
+
+.surprise-box h2{
+    font-family:'Dancing Script',cursive;
+    font-size:42px;
+    color:#d45c85;
+}
+
+.surprise-box p{
+    margin-top:10px;
+    line-height:1.7;
+}
+
+@keyframes pop{
+    from{
+        opacity:0;
+        transform:scale(.7);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+.back{
+    margin-top:35px;
+    display:inline-block;
+    text-decoration:none;
+    color:#a66a82;
+    font-size:14px;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+    h1{
+        font-size:45px;
+    }
+
+    .container{
+        padding-top:30px;
+    }
+
+    .letter{
+        padding:30px 22px;
+    }
+
+    .letter p{
+        font-size:20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Everything About You 💗</h1>
+    <p class="subtitle">
+        A tiny scrapbook for my girl anuku who means more than she knows...
+    </p>
+
+    <!-- SCRAPBOOK -->
+
+    <div class="scrapbook">
+
+        <div class="card">
+            <div class="photo">🌷</div>
+            <h3>The First Thing</h3>
+            <p>
+                Sometimes one person enters your life quietly and change everything into beautiful
+                and somehow becomes my whole life🥹💗
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="photo">🥹💗</div>
+            <h3>Your Smile</h3>
+            <p>
+                If I could keep one thing forever,
+                it would be every little moment that makes you smile and YOU🥹
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="photo">🫂</div>
+            <h3>The Hug</h3>
+            <p>
+                One day I don't want our hugs to be imaginary anymore and the tighest hug ever 
+                I want the real one The ridiculously long one. 🥺
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="photo">🌙</div>
+            <h3>Our Little World</h3>
+            <p>
+                No matter nanga evlo far iruthalum ma 
+                we can still create a little world that belongs only to us🥹💗 
+            </p>
+        </div>
+
+    </div>
+
+
+    <!-- REASONS -->
+
+    <div class="section-title">
+        Little Reasons I Love You 💕
+    </div>
+
+    <div class="reasons">
+
+        <div class="reason">
+            <div class="emoji">🥰</div>
+            <p>Unga azhagana smile</p>
+        </div>
+
+        <div class="reason">
+            <div class="emoji">😂</div>
+            <p>The way you make me laugh you always do </p>
+        </div>
+
+        <div class="reason">
+            <div class="emoji">💗</div>
+            <p>The little things you do</p>
+        </div>
+
+        <div class="reason">
+            <div class="emoji">🫶</div>
+            <p>The way you make simple moments special</p>
+        </div>
+
+        <div class="reason">
+            <div class="emoji">🌸</div>
+            <p>Your beautiful heart</p>
+        </div>
+
+        <div class="reason">
+            <div class="emoji">♾️</div>
+            <p>Because you're simply you only you😚</p>
+        </div>
+
+    </div>
+
+
+    <!-- LOVE JAR -->
+
+    <div class="section-title">
+        Pick a little love note 💌
+    </div>
+
+    <div class="jar-area">
+
+        <div class="jar" onclick="loveNote()">
+            💌
+        </div>
+
+        <div class="jar-text" id="jarText">
+            Tap the jar, my pretty girl 🥺
+        </div>
+
+    </div>
+
+
+    <!-- LETTER -->
+
+    <div class="section-title">
+        And finally...
+    </div>
+
+    <div class="letter">
+
+        <h2>A Letter For You 💌</h2>
+
+        <p>
+            Dear kanmanii,
+        </p>
+
+        <p>
+            I don't know if a website can really explain
+            how much someone means to you.
+            But naa try pannuren ma 
+        </p>
+
+        <p>
+            You became someone that naa lose pannirave koodathu nu nenaikura human ma,
+            ungala pathi think pnnatha oru random moments eh illa ma 
+            ungakitta oru talent iruku makes my ordinary day feel more special.
+        </p>
+
+        <p>
+            I don't need perfect days.
+            I just want more little moments with you neraya smile and more silly conversations
+           neraya memories.
+        </p>
+
+        <p>
+            And one dayethu ellam poitu screen ellam disapper agi unga pakthula eh irupen ma 🥹
+        </p>
+
+        <p>
+            Until then, whenever you miss me,
+            remember that somewhere in this huge world,
+            there is someone who is smiling because you exist and loving you bayaragama ungalukagave oru oru min um spending ma so grateful to have you in my life eppavume ungala ungaluku pudicha mathri love pannitey irupen ma
+        </p>
+
+        <p class="signature">
+            Always yours,<br>
+            Your favourite idiot 🥺❤️
+        </p>
+
+    </div>
+
+
+    <!-- FINAL SURPRISE -->
+
+    <button class="final-btn" onclick="showSurprise()">
+        One last little surprise 🎁
+    </button>
+
+    <div id="surprise">
+
+        <div class="surprise-box">
+
+            <div class="big">🥹💗</div>
+
+            <h2>You found it!</h2>
+
+            <p>
+                If you reached this page...
+                congratulations.
+            </p>
+
+            <p>
+                You officially reached the end of my little world.
+                But hopefully, not the end of our story. ♾️
+            </p>
+
+            <p>
+                I love you, Anuku. ❤️
+            </p>
+
+            <p>
+                Now give me my virtual hug. 🫂
+and i hope you like this and naa enda love laa oru kutty percent eh itha website aana express panni iruken ma MY LOVE YOU IS HUGE ❤️
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <a href="page3.html" class="back">
+        ← Back to our little game
+    </a>
+
+</div>
+
+
+<script>
+
+/* LOVE NOTES */
+
+const notes = [
+    "You are my favourite notification. 💗",
+    "I hope you know how precious you are to me. 🥺",
+    "If hugs could travel through screens, you'd be trapped in mine. 🫂",
+    "You're one of the best things that happened to my little world. 🌷",
+    "I would choose you in every little universe. ♾️",
+    "Your smile has no business being this cute. 😭❤️",
+    "Distance is annoying... but you're worth it. 💕",
+    "Just a reminder: somebody is very, very lucky to love you. 🥰",
+    "Come here. I owe you approximately 1000 hugs. 🫂",
+    "You're my favourite person. That's it. No arguments. 😌💗"
+];
+
+function loveNote(){
+
+    const random =
+        notes[Math.floor(Math.random() * notes.length)];
+
+    document.getElementById("jarText").innerText = random;
+
+    createHearts();
+}
+
+
+/* FINAL SURPRISE */
+
+function showSurprise(){
+
+    document.getElementById("surprise").style.display = "block";
+
+    for(let i=0;i<20;i++){
+        setTimeout(createHeartBurst,i*50);
+    }
+
+}
+
+
+/* FLOATING HEARTS */
+
+function createHearts(){
+
+    for(let i=0;i<8;i++){
+
+        const heart=document.createElement("div");
+
+        heart.className="heart";
+        heart.innerHTML="❤";
+
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.fontSize=(12+Math.random()*20)+"px";
+        heart.style.animationDuration=(4+Math.random()*4)+"s";
+
+        document.body.appendChild(heart);
+
+        setTimeout(()=>{
+            heart.remove();
+        },8000);
+    }
+
+}
+
+
+/* HEART BURST */
+
+function createHeartBurst(){
+
+    const heart=document.createElement("div");
+
+    heart.innerHTML="💗";
+
+    heart.style.position="fixed";
+    heart.style.left="50%";
+    heart.style.top="50%";
+    heart.style.fontSize="25px";
+    heart.style.zIndex="9999";
+    heart.style.pointerEvents="none";
+
+    const angle=Math.random()*Math.PI*2;
+    const distance=100+Math.random()*250;
+
+    document.body.appendChild(heart);
+
+    heart.animate([
+        {
+            transform:"translate(-50%,-50%) scale(.5)",
+            opacity:1
+        },
+        {
+            transform:
+            `translate(
+                calc(-50% + ${Math.cos(angle)*distance}px),
+                calc(-50% + ${Math.sin(angle)*distance}px)
+            ) scale(1.5)`,
+            opacity:0
+        }
+    ],{
+        duration:1200,
+        easing:"ease-out"
+    });
+
+    setTimeout(()=>{
+        heart.remove();
+    },1200);
+
+}
+
+
+/* START HEARTS */
+
+setInterval(createHearts,1800);
+
+createHearts();
+
+</script>
+
+</body>
+</html>

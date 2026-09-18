@@ -1,0 +1,1209 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Our Little Game 🎮💗</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Dancing+Script:wght@500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    font-family:'Comic Neue',cursive;
+    color:#713651;
+    overflow-x:hidden;
+
+    background:
+        radial-gradient(circle at 15% 15%,#fff 0 3px,transparent 4px),
+        radial-gradient(circle at 85% 25%,#fff 0 3px,transparent 4px),
+        linear-gradient(135deg,#ffe0ed,#fff4fa,#f3ddff);
+}
+
+
+/* ================= PAGE ================= */
+
+.page{
+    min-height:100vh;
+    padding:30px 18px 100px;
+    text-align:center;
+}
+
+
+/* ================= BACK ================= */
+
+.back{
+    position:fixed;
+    top:15px;
+    left:15px;
+
+    border:none;
+    background:#ffffffdd;
+    backdrop-filter:blur(8px);
+
+    padding:10px 16px;
+    border-radius:30px;
+
+    color:#a04f73;
+    font-family:inherit;
+
+    cursor:pointer;
+
+    box-shadow:0 7px 20px #b75d8025;
+
+    z-index:100;
+}
+
+
+/* ================= TITLE ================= */
+
+.title{
+    font-family:'Dancing Script',cursive;
+
+    font-size:clamp(50px,12vw,75px);
+
+    color:#df528c;
+
+    margin-top:25px;
+
+    text-shadow:0 4px #ffd0e1;
+
+    animation:titleIn 1s ease;
+}
+
+@keyframes titleIn{
+
+    from{
+        opacity:0;
+        transform:translateY(-20px) scale(.9);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+
+}
+
+.subtitle{
+
+    font-size:18px;
+
+    margin:5px auto 20px;
+
+    max-width:500px;
+
+    line-height:1.6;
+}
+
+
+/* ================= GAME CARD ================= */
+
+.game{
+
+    width:min(650px,95vw);
+
+    margin:20px auto;
+
+    padding:28px 20px 35px;
+
+    background:#ffffffd9;
+
+    backdrop-filter:blur(12px);
+
+    border:2px solid #ffd1e3;
+
+    border-radius:35px;
+
+    box-shadow:
+        0 20px 50px #b9597e22;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+
+/* ================= SCORE ================= */
+
+.topbar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+    padding:0 5px;
+
+    font-size:16px;
+
+    color:#a05275;
+}
+
+.score{
+
+    background:#ffe4ef;
+
+    padding:8px 14px;
+
+    border-radius:30px;
+
+    font-weight:bold;
+}
+
+.lives{
+
+    letter-spacing:3px;
+
+}
+
+
+/* ================= QUESTION ================= */
+
+.question-number{
+
+    font-size:14px;
+
+    color:#d05b8c;
+
+    margin-bottom:10px;
+}
+
+.question{
+
+    font-size:25px;
+
+    font-weight:bold;
+
+    line-height:1.4;
+
+    margin-bottom:25px;
+
+    color:#713651;
+}
+
+
+/* ================= ANSWERS ================= */
+
+.answers{
+
+    display:grid;
+
+    gap:12px;
+}
+
+.answer{
+
+    width:100%;
+
+    border:2px solid #ffd2e3;
+
+    background:#fff8fc;
+
+    padding:14px 15px;
+
+    border-radius:20px;
+
+    color:#713651;
+
+    font-family:inherit;
+
+    font-size:17px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    box-shadow:0 4px 12px #b95c7b10;
+}
+
+.answer:hover{
+
+    transform:translateY(-3px) scale(1.02);
+
+    background:#ffe6f0;
+
+    border-color:#f59abe;
+}
+
+.answer.correct{
+
+    background:#dff8e8;
+
+    border-color:#78cf98;
+
+    color:#287547;
+
+    animation:correct .5s ease;
+}
+
+.answer.wrong{
+
+    background:#ffe1e7;
+
+    border-color:#ef8aa0;
+
+    color:#a43853;
+
+    animation:shake .45s ease;
+}
+
+@keyframes correct{
+
+    50%{
+        transform:scale(1.05);
+    }
+
+}
+
+@keyframes shake{
+
+    0%,100%{
+        transform:translateX(0);
+    }
+
+    25%{
+        transform:translateX(-8px);
+    }
+
+    75%{
+        transform:translateX(8px);
+    }
+
+}
+
+
+/* ================= FEEDBACK ================= */
+
+.feedback{
+
+    min-height:35px;
+
+    margin-top:18px;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    color:#df528c;
+}
+
+
+/* ================= NEXT ================= */
+
+.next{
+
+    display:none;
+
+    border:none;
+
+    margin-top:15px;
+
+    padding:13px 28px;
+
+    border-radius:50px;
+
+    background:#ed6b9c;
+
+    color:white;
+
+    font-family:inherit;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:0 8px 20px #c85c822f;
+
+    transition:.25s;
+}
+
+.next:hover{
+
+    transform:translateY(-3px) scale(1.04);
+}
+
+
+/* ================= START SCREEN ================= */
+
+.start-screen{
+
+    padding:15px 5px 5px;
+}
+
+.big-heart{
+
+    font-size:75px;
+
+    animation:heartbeat 1.2s infinite;
+}
+
+.start-screen h2{
+
+    font-family:'Dancing Script',cursive;
+
+    font-size:40px;
+
+    color:#df528c;
+
+    margin:10px 0;
+}
+
+.start-screen p{
+
+    font-size:17px;
+
+    line-height:1.7;
+
+    max-width:450px;
+
+    margin:auto;
+}
+
+.start-btn{
+
+    border:none;
+
+    margin-top:22px;
+
+    padding:15px 30px;
+
+    border-radius:50px;
+
+    background:linear-gradient(135deg,#ff78ac,#e95691);
+
+    color:white;
+
+    font-family:inherit;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:0 10px 25px #c7588235;
+
+    transition:.3s;
+}
+
+.start-btn:hover{
+
+    transform:translateY(-5px) scale(1.05);
+}
+
+
+/* ================= FINAL ================= */
+
+.final{
+
+    display:none;
+
+    animation:finalIn 1s ease;
+}
+
+@keyframes finalIn{
+
+    from{
+        opacity:0;
+        transform:scale(.8);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+
+}
+
+.final-heart{
+
+    font-size:90px;
+
+    animation:
+        heartbeat 1.1s infinite,
+        floating 2s ease-in-out infinite;
+}
+
+.final h2{
+
+    font-family:'Dancing Script',cursive;
+
+    color:#df528c;
+
+    font-size:55px;
+
+    margin:10px 0;
+}
+
+.final p{
+
+    font-size:20px;
+
+    line-height:1.7;
+
+    max-width:500px;
+
+    margin:10px auto;
+}
+
+
+/* ================= SECRET BOX ================= */
+
+.secret-box{
+
+    margin:30px auto 0;
+
+    padding:22px;
+
+    max-width:500px;
+
+    background:#fff7fb;
+
+    border:2px dashed #f19abc;
+
+    border-radius:25px;
+}
+
+.secret-box h3{
+
+    color:#df528c;
+
+    margin-bottom:8px;
+}
+
+.secret-text{
+
+    font-family:'Dancing Script',cursive;
+
+    font-size:29px;
+
+    color:#d94f88;
+
+    min-height:45px;
+}
+
+
+/* ================= BUTTON ================= */
+
+.home-btn{
+
+    border:none;
+
+    margin-top:25px;
+
+    padding:14px 27px;
+
+    border-radius:50px;
+
+    background:#fff;
+
+    border:2px solid #ffb7d0;
+
+    color:#c94f82;
+
+    font-family:inherit;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+}
+
+
+/* ================= FLOATING HEARTS ================= */
+
+.heart{
+
+    position:fixed;
+
+    bottom:-40px;
+
+    pointer-events:none;
+
+    z-index:50;
+
+    animation:floatUp linear forwards;
+}
+
+@keyframes floatUp{
+
+    0%{
+        transform:
+            translateY(0)
+            rotate(0)
+            scale(.7);
+        opacity:0;
+    }
+
+    15%{
+        opacity:1;
+    }
+
+    100%{
+        transform:
+            translateY(-110vh)
+            rotate(360deg)
+            scale(1.2);
+        opacity:0;
+    }
+
+}
+
+
+/* ================= HEARTBEAT ================= */
+
+@keyframes heartbeat{
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    20%{
+        transform:scale(1.18);
+    }
+
+    40%{
+        transform:scale(1);
+    }
+
+}
+
+@keyframes floating{
+
+    50%{
+        transform:translateY(-10px);
+    }
+
+}
+
+
+/* ================= MOBILE ================= */
+
+@media(max-width:500px){
+
+    .question{
+        font-size:21px;
+    }
+
+    .answer{
+        font-size:16px;
+    }
+
+    .game{
+        padding:23px 15px 30px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<button class="back" onclick="goBack()">
+    ← Back 💗
+</button>
+
+
+<section class="page">
+
+    <h1 class="title">
+        Our Little Game 🎮💗
+    </h1>
+
+    <p class="subtitle">
+        Okay Anuku... 👀
+        <br>
+        Let's see how well you know your loosu boy. 🤭
+    </p>
+
+
+    <div class="game">
+
+
+        <!-- ================= START ================= -->
+
+        <div class="start-screen" id="startScreen">
+
+            <div class="big-heart">
+                💗
+            </div>
+
+            <h2>
+                Ready, pretty girl? 🥺
+            </h2>
+
+            <p>
+
+                There are a few questions waiting for you.
+
+                <br>
+
+                perusa ethum illa ma 😂
+
+                <br>
+
+               neega thappa sollanum fine ma 😚😚😚
+
+                <br><br>
+
+                And don't worry...
+
+                <br>
+
+                there is a little surprise at the end. 💌
+
+            </p>
+
+            <button class="start-btn" onclick="startGame()">
+                Start the game 🎮
+            </button>
+
+        </div>
+
+
+        <!-- ================= GAME ================= -->
+
+        <div id="gameScreen" style="display:none;">
+
+            <div class="topbar">
+
+                <div class="score">
+                    💗 Score: <span id="score">0</span>
+                </div>
+
+                <div class="lives" id="lives">
+                    ❤️❤️❤️
+                </div>
+
+            </div>
+
+
+            <div class="question-number" id="questionNumber">
+                Question 1 / 8
+            </div>
+
+
+            <div class="question" id="question">
+            </div>
+
+
+            <div class="answers" id="answers">
+            </div>
+
+
+            <div class="feedback" id="feedback">
+            </div>
+
+
+            <button class="next"
+                    id="nextButton"
+                    onclick="nextQuestion()">
+
+                Next question 💕 →
+
+            </button>
+
+        </div>
+
+
+        <!-- ================= FINAL ================= -->
+
+        <div class="final" id="finalScreen">
+
+            <div class="final-heart">
+                💗
+            </div>
+
+            <h2>
+                You finished! 🥹
+            </h2>
+
+            <p id="finalScore">
+            </p>
+
+            <p>
+                But honestly...
+                <br>
+                there was never a wrong answer.
+            </p>
+
+
+            <div class="secret-box">
+
+                <h3>
+                    🔐 Your little reward
+                </h3>
+
+                <div class="secret-text" id="secretText">
+                </div>
+
+            </div>
+
+
+            <button class="start-btn"
+                    onclick="heartExplosion()">
+
+                Give me a virtual hug 🫂
+
+            </button>
+
+
+            <br>
+
+
+            <button class="home-btn"
+                    onclick="goHome()">
+
+                Back to my little world 🏠💗
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<script>
+
+
+/* ================= QUESTIONS ================= */
+
+const questions = [
+
+    {
+        question:"What do I want most right now? 🥺",
+        answers:[
+            "A new phone 📱",
+            "A million rupees 💰",
+            "To finally meet you ❤️",
+            "A giant pizza 🍕"
+        ],
+        correct:2,
+        good:"Obviouslyyyy 😭❤️",
+        wrong:"Excuse meee? 😂 Try again!"
+    },
+
+    {
+        question:"Who is my favourite person? 👀",
+        answers:[
+            "My pillow 🛏️",
+            "My friends 😂",
+            "Youuu 🥺💗",
+            "Google"
+        ],
+        correct:2,
+        good:"You knew that one! 🥹💗",
+        wrong:"HOW COULD YOU 😭😂"
+    },
+
+    {
+        question:"What would I probably do if I saw you right now? 🫂",
+        answers:[
+            "Run away 😂",
+            "Give you the biggest hug",
+            "Pretend I didn't see you",
+            "Ask for your homework"
+        ],
+        correct:1,
+        good:"YESSS. COME HEREEE 🫂❤️",
+        wrong:"Nooo 😭 I would hug you!"
+    },
+
+    {
+        question:"What is my favourite thing about you? 🌷",
+        answers:[
+            "Your phone",
+            "Your smile & the little things about you",
+            "Your WiFi",
+            "Your shoes 👟"
+        ],
+        correct:1,
+        good:"Exactlyyy 🥺🌷",
+        wrong:"Everything about you! But think again. ❤️"
+    },
+
+    {
+        question:"What do I secretly want? 👀",
+        answers:[
+            "To travel alone",
+            "To disappear",
+            "To make memories with you",
+            "To become a potato 🥔"
+        ],
+        correct:2,
+        good:"You know me too well. 😭❤️",
+        wrong:"Potato was tempting though 😂"
+    },
+
+    {
+        question:"If you were sad, what would I want to give you? 🥺",
+        answers:[
+            "A lecture 😂",
+            "A hug",
+            "A maths exam",
+            "Nothing"
+        ],
+        correct:1,
+        good:"A biiig hug. 🫂💗",
+        wrong:"Wronggg! HUG ATTACK! 🫂"
+    },
+
+    {
+        question:"What makes this whole website special? ✨",
+        answers:[
+            "The animations",
+            "The colours",
+            "The code",
+            "You ❤️"
+        ],
+        correct:3,
+        good:"THAT'S MY GIRL 😭❤️",
+        wrong:"Nice try 😂 But YOU."
+    },
+
+    {
+        question:"Last question... who do I love? 💗",
+        answers:[
+            "Nobody",
+            "My cat",
+            "Anuku ❤️",
+            "Pizza"
+        ],
+        correct:2,
+        good:"CORRECT. ALWAYS. 🥺❤️",
+        wrong:"There is only one correct answer here... 👀"
+    }
+
+];
+
+
+let currentQuestion=0;
+
+let score=0;
+
+let lives=3;
+
+let answered=false;
+
+
+/* ================= START ================= */
+
+function startGame(){
+
+    document.getElementById("startScreen")
+        .style.display="none";
+
+    document.getElementById("gameScreen")
+        .style.display="block";
+
+    loadQuestion();
+
+}
+
+
+/* ================= LOAD QUESTION ================= */
+
+function loadQuestion(){
+
+    answered=false;
+
+    const q=questions[currentQuestion];
+
+    document.getElementById("questionNumber")
+        .innerText=
+        `Question ${currentQuestion+1} / ${questions.length}`;
+
+    document.getElementById("question")
+        .innerText=q.question;
+
+    document.getElementById("feedback")
+        .innerText="";
+
+    document.getElementById("nextButton")
+        .style.display="none";
+
+
+    const answers=
+        document.getElementById("answers");
+
+    answers.innerHTML="";
+
+
+    q.answers.forEach((answer,index)=>{
+
+        const button=
+            document.createElement("button");
+
+        button.className="answer";
+
+        button.innerText=answer;
+
+        button.onclick=()=>{
+            checkAnswer(index,button);
+        };
+
+        answers.appendChild(button);
+
+    });
+
+}
+
+
+/* ================= CHECK ================= */
+
+function checkAnswer(index,button){
+
+    if(answered) return;
+
+    answered=true;
+
+    const q=questions[currentQuestion];
+
+    const buttons=
+        document.querySelectorAll(".answer");
+
+
+    buttons.forEach(b=>{
+        b.style.pointerEvents="none";
+    });
+
+
+    if(index===q.correct){
+
+        score++;
+
+        document.getElementById("score")
+            .innerText=score;
+
+        button.classList.add("correct");
+
+        document.getElementById("feedback")
+            .innerText=q.good;
+
+        heartExplosion();
+
+    }else{
+
+        lives--;
+
+        button.classList.add("wrong");
+
+        document.getElementById("lives")
+            .innerText=
+            "❤️".repeat(lives)+"🖤".repeat(3-lives);
+
+        document.getElementById("feedback")
+            .innerText=q.wrong;
+
+
+        buttons[q.correct]
+            .classList.add("correct");
+
+    }
+
+
+    document.getElementById("nextButton")
+        .style.display="inline-block";
+
+
+}
+
+
+/* ================= NEXT ================= */
+
+function nextQuestion(){
+
+    currentQuestion++;
+
+    if(currentQuestion>=questions.length){
+
+        finishGame();
+
+        return;
+    }
+
+    loadQuestion();
+
+}
+
+
+/* ================= FINISH ================= */
+
+function finishGame(){
+
+    document.getElementById("gameScreen")
+        .style.display="none";
+
+    document.getElementById("finalScreen")
+        .style.display="block";
+
+
+    document.getElementById("finalScore")
+        .innerHTML=
+        `You got <strong>${score}/${questions.length}</strong> 💗<br>
+         But your real score is <strong>∞/10</strong> in my heart. 🥺`;
+
+
+    const secrets=[
+
+        "You unlocked one giant hug. 🫂💗",
+
+        "Secret message: I love youuuuu. 🥺❤️",
+
+        "You found the hidden reward... me missing you. 😂💗",
+
+        "Achievement unlocked: Favourite Person 🏆❤️",
+
+        "Distance can't delete this little love story. 🌎💗"
+
+    ];
+
+    document.getElementById("secretText")
+        .innerText=
+        secrets[Math.floor(Math.random()*secrets.length)];
+
+
+    heartExplosion();
+
+}
+
+
+/* ================= VIRTUAL HUG ================= */
+
+function heartExplosion(){
+
+    const types=[
+        "💗",
+        "💕",
+        "💖",
+        "💞",
+        "🫶",
+        "🫂",
+        "🌸",
+        "✨"
+    ];
+
+
+    for(let i=0;i<35;i++){
+
+        setTimeout(()=>{
+
+            const h=
+                document.createElement("div");
+
+            h.className="heart";
+
+            h.innerText=
+                types[
+                    Math.floor(Math.random()*types.length)
+                ];
+
+            h.style.left=
+                (30+Math.random()*40)+"vw";
+
+            h.style.bottom="35vh";
+
+            h.style.fontSize=
+                (18+Math.random()*30)+"px";
+
+            h.style.animationDuration=
+                (2+Math.random()*2)+"s";
+
+            document.body.appendChild(h);
+
+
+            setTimeout(()=>{
+                h.remove();
+            },4500);
+
+        },i*45);
+
+    }
+
+}
+
+
+/* ================= FLOATING HEARTS ================= */
+
+const floating=[
+    "💗",
+    "💕",
+    "🌸",
+    "✨",
+    "💖"
+];
+
+
+function floatingHeart(){
+
+    const h=
+        document.createElement("div");
+
+    h.className="heart";
+
+    h.innerText=
+        floating[
+            Math.floor(Math.random()*floating.length)
+        ];
+
+    h.style.left=
+        Math.random()*100+"vw";
+
+    h.style.fontSize=
+        (14+Math.random()*20)+"px";
+
+    h.style.animationDuration=
+        (5+Math.random()*5)+"s";
+
+    document.body.appendChild(h);
+
+    setTimeout(()=>{
+        h.remove();
+    },10000);
+
+}
+
+
+setInterval(floatingHeart,800);
+
+
+/* ================= NAVIGATION ================= */
+
+function goBack(){
+
+    window.location.href="page2.html";
+
+}
+
+function goHome(){
+
+    window.location.href="index.html";
+
+}
+
+</script>
+
+</body>
+</html>
+```
